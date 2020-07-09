@@ -14,18 +14,28 @@ void setup()
   tm1650.clear();
 }
 
-int i = 0;
-String string = "0";
-
 void loop() 
 {
-  string += i;
-  
-  tm1650.displayString(string);
+  tm1650.displayString("01");
   delay(1000);
 
-  if(i < 10)
-    i++;
-  else
-    i = 0;
+  tm1650.displayString("03");
+  delay(1000);
+
+  tm1650.displayString("05");
+  delay(1000);
+
+  tm1650.displayString("07");
+  delay(1000);
+
+  tm1650.displayString("09");
+  delay(1000);
+
+  tm1650.setDot(0, true);
+  tm1650.setDot(1, true);
+  delay(1000);
+
+  tm1650.setDot(0, false);
+  tm1650.setDot(1, false);
+  delay(1000);
 }
