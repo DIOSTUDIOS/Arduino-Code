@@ -3,28 +3,29 @@
 
 TM1650 tm1650;
 
-String numbers = "0123456789";
-
 void setup() 
 {
   Wire.begin(); //Join the bus as master
   
   tm1650.init();
   tm1650.setBrightness(TM1650_MIN_BRIGHT);
-//  tm1650.setBrightness(TM1650_MAX_BRIGHT);
 
   tm1650.displayOn();
+  tm1650.clear();
 }
 
 int i = 0;
+String string = "0";
 
 void loop() 
 {
-  for(; i<=numbers.length(); i++)
-  {
-    tm1650.displayString(numbers[i]);
-  }
+  string += i;
   
-  if(i == numbers.length())
-    i=0;
+  tm1650.displayString(string);
+  delay(1000);
+
+  if(i < 10)
+    i++;
+  else
+    i = 0;
 }
