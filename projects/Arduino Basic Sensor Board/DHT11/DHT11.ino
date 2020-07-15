@@ -5,8 +5,11 @@
 DHT11 dht11(D8);
 TM1650 tm1650(2);
 
-char C[2] = "";
 int c = 0;
+int h = 0;
+
+char C = "12";
+char H = "34";
 
 void setup()
 {
@@ -24,11 +27,13 @@ void loop()
   dht11.update();
 
   c = dht11.readCelsius();
-//  h = dht11.readHumidity();
+  h = dht11.readHumidity();
 
-//  C[0] = (c - c%10)/10;
-//  C[1] = c%10;
+  Serial.print((c/10)%10 + (c%10));
+  Serial.print("\t\t");
+  Serial.println(h);
+
+  tm1650.displayString(C);
   
-  Serial.println(c);
   delay(1000);
 }
