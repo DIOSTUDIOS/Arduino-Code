@@ -1,15 +1,9 @@
-#include <TM1650.h>
 #include <Wire.h>
+#include <TM1650.h>
 #include <EduIntro.h>
 
 DHT11 dht11(D8);
 TM1650 tm1650(2);
-
-int c = 0;
-int h = 0;
-
-char C = "12";
-char H = "34";
 
 void setup()
 {
@@ -18,22 +12,33 @@ void setup()
   tm1650.init();
   tm1650.displayOn();
   tm1650.clear();
-
-  Serial.begin(9600);
 }
+
+char C[2] = "00";
+char H[2] = "00";
+
+int c = 0;
+int h = 0;
 
 void loop()
 {
   dht11.update();
 
   c = dht11.readCelsius();
-  h = dht11.readHumidity();
-
-  Serial.print((c/10)%10 + (c%10));
-  Serial.print("\t\t");
-  Serial.println(h);
-
-  tm1650.displayString(C);
+  itoa(c, C, 10);
   
+  tm1650.displayString("C ");
   delay(1000);
+  tm1650.displayString(C);
+
+  delay(3000);
+
+  h = dht11.readHumidity();
+  itoa(h, H, 10);
+
+  tm1650.displayString("H ");
+  delay(1000);
+  tm1650.displayString(H);
+
+  delay(3000);
 }
